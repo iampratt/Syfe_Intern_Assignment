@@ -2,7 +2,8 @@
 
 A modern, responsive, and lightweight application designed to help users track their financial goals. Built with **Next.js 15**, **TypeScript**, and **Tailwind CSS**, it features real-time currency conversion, local data persistence, and a polished user experience.
 
-![App Screenshot](https://via.placeholder.com/800x400?text=Syfe+Savings+Planner+Demo)
+![App Screenshot](<img width="1470" height="923" alt="Screenshot 2026-01-06 at 18 53 02" src="https://github.com/user-attachments/assets/f2accbbc-a55b-4115-bc0d-f5317618f2ff" />)
+
 
 ---
 
