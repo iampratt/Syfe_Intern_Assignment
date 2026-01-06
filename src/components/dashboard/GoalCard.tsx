@@ -51,7 +51,7 @@ export function GoalCard({ goal }: GoalCardProps) {
                             removeGoal(goal.id);
                         }
                     }}
-                    className="absolute top-4 right-4 p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="absolute top-4 right-4 p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-full lg:opacity-0 group-hover:opacity-100 transition-opacity"
                     title="Remove Goal"
                 >
                     <Trash2 className="w-4 h-4" />
