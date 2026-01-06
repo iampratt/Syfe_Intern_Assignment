@@ -17,10 +17,12 @@ export default function Home() {
 
         {/* Header Section */}
         <div className="text-center space-y-2 mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-brand/10 text-brand mb-4">
-            <Target className="w-6 h-6" />
+          <div className="sm:flex sm:items-center sm:justify-center sm:align-center gap-4">
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-brand/10 text-brand">
+              <Target className="w-6 h-6" />
+            </div>
+            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Syfe Savings Planner</h1>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Syfe Savings Planner</h1>
           <p className="text-gray-500 max-w-lg mx-auto">Track your financial goals and build your future</p>
         </div>
 
