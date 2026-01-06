@@ -12,6 +12,7 @@ interface GoalsContextType {
     error: string | null;
     addGoal: (goal: Omit<Goal, 'id' | 'createdAt' | 'contributions'>) => void;
     addContribution: (goalId: string, contribution: Omit<Contribution, 'id'>) => void;
+    removeGoal: (id: string) => void;
     refreshRates: () => Promise<void>;
 }
 
@@ -113,6 +114,10 @@ export function GoalsProvider({ children }: { children: React.ReactNode }) {
         }));
     };
 
+    const removeGoal = (id: string) => {
+        setGoals(prev => prev.filter(goal => goal.id !== id));
+    };
+
     return (
         <GoalsContext.Provider value={{
             goals,
@@ -122,6 +127,7 @@ export function GoalsProvider({ children }: { children: React.ReactNode }) {
             error,
             addGoal,
             addContribution,
+            removeGoal,
             refreshRates
         }}>
             {children}

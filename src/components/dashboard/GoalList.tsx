@@ -20,11 +20,42 @@ export function GoalList() {
         );
     }
 
+    const completedGoals = goals.filter(g => {
+        const totalSaved = g.contributions.reduce((sum, c) => sum + c.amount, 0);
+        return totalSaved >= g.targetAmount;
+    });
+
+    const activeGoals = goals.filter(g => {
+        const totalSaved = g.contributions.reduce((sum, c) => sum + c.amount, 0);
+        return totalSaved < g.targetAmount;
+    });
+
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {goals.map((goal) => (
-                <GoalCard key={goal.id} goal={goal} />
-            ))}
+        <div className="space-y-12">
+            {activeGoals.length > 0 && (
+                <div className="space-y-4">
+                    <h2 className="text-lg font-semibold text-gray-700 uppercase tracking-wider text-xs">Active Goals</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {activeGoals.map((goal) => (
+                            <GoalCard key={goal.id} goal={goal} />
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            {completedGoals.length > 0 && (
+                <div className="space-y-4">
+                    <h2 className="text-lg font-semibold text-gray-700 uppercase tracking-wider text-xs flex items-center gap-2">
+                        Completed Goals
+                        <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-[10px]">{completedGoals.length}</span>
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 opacity-80 hover:opacity-100 transition-opacity">
+                        {completedGoals.map((goal) => (
+                            <GoalCard key={goal.id} goal={goal} />
+                        ))}
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
