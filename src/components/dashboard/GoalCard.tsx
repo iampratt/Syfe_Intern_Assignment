@@ -44,26 +44,41 @@ export function GoalCard({ goal }: GoalCardProps) {
                 "flex flex-col gap-4 transition-all duration-300 relative group",
                 isCompleted ? "bg-green-50/50 border-green-100" : "hover:shadow-md"
             )}>
-                {/* Delete Button (visible on hover or focus) */}
-                <button
-                    onClick={() => {
-                        if (confirm('Are you sure you want to delete this goal?')) {
-                            removeGoal(goal.id);
-                        }
-                    }}
-                    className="absolute top-4 right-4 p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-full lg:opacity-0 group-hover:opacity-100 transition-opacity"
-                    title="Remove Goal"
-                >
-                    <Trash2 className="w-4 h-4" />
-                </button>
-
-                <div className="flex justify-between items-start pr-8">
-                    <div>
-                        <h3 className="font-bold text-gray-900 text-lg flex items-center gap-2">
-                            {goal.name}
+                <div className="flex flex-col gap-2 relative">
+                    {/* Top Row: Name, Status, Percentage, Delete */}
+                    <div className="flex justify-between items-center w-full">
+                        <div className="flex items-center gap-2">
+                            <h3 className="font-bold text-gray-900 text-lg">{goal.name}</h3>
                             {isCompleted && <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">Completed</span>}
-                        </h3>
-                        <div className="flex items-baseline gap-2 mt-1">
+                        </div>
+
+                        <div className="flex items-center gap-3">
+                            {/* Completion Percentage Badge */}
+                            <div className={cn(
+                                "px-2 py-1 rounded text-xs font-medium",
+                                isCompleted ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-600"
+                            )}>
+                                {Math.round((totalSaved / goal.targetAmount) * 100)}%
+                            </div>
+
+                            {/* Delete Button */}
+                            <button
+                                onClick={() => {
+                                    if (confirm('Are you sure you want to delete this goal?')) {
+                                        removeGoal(goal.id);
+                                    }
+                                }}
+                                className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-full lg:opacity-0 group-hover:opacity-100 transition-opacity"
+                                title="Remove Goal"
+                            >
+                                <Trash2 className="w-4 h-4" />
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Second Row: Amounts */}
+                    <div>
+                        <div className="flex items-baseline gap-2">
                             <span className="text-2xl font-bold text-brand">
                                 {amountInOriginal}
                             </span>
@@ -71,14 +86,6 @@ export function GoalCard({ goal }: GoalCardProps) {
                         <p className="text-sm text-gray-500 mt-0.5">
                             {amountInConverted}
                         </p>
-                    </div>
-
-                    {/* Completion Percentage Badge */}
-                    <div className={cn(
-                        "px-2 py-1 rounded text-xs font-medium",
-                        isCompleted ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-600"
-                    )}>
-                        {Math.round((totalSaved / goal.targetAmount) * 100)}%
                     </div>
                 </div>
 
