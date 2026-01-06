@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useGoals } from '@/lib/store';
 import { Button, Input } from '../ui/primitives';
 import { Goal } from '@/lib/types';
+import confetti from 'canvas-confetti';
 
 interface AddContributionFormProps {
     goal: Goal;
@@ -31,6 +32,20 @@ export function AddContributionForm({ goal, onSuccess, onCancel }: AddContributi
             amount: numAmount,
             date,
         });
+
+        // Check for completion
+        const currentTotal = goal.contributions.reduce((sum, c) => sum + c.amount, 0);
+        const newTotal = currentTotal + numAmount;
+
+        if (newTotal >= goal.targetAmount) {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                zIndex: 9999, // Ensure it's on top of everything
+                colors: ['#4C51BF', '#818CF8', '#C7D2FE', '#FFD700']
+            });
+        }
 
         onSuccess();
     };
